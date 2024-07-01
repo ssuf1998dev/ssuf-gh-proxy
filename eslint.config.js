@@ -15,6 +15,7 @@ export default antfu({
     html: true,
     css: true,
   },
+  unocss: true,
   rules: {
     "import/order": [
       "error",
@@ -26,6 +27,7 @@ export default antfu({
       singleline: { max: 3 },
       multiline: { max: 1 },
     }],
+    "unocss/enforce-class-compile": "warn",
   },
   ignores: ["dist"],
 });

@@ -1,12 +1,12 @@
-import { defineNuxtConfig } from "nuxt/config";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     "@unocss/nuxt",
     "nuxtjs-naive-ui",
-    ["unplugin-icons/nuxt", {}],
+    "unplugin-icons/nuxt",
+    "@nuxtjs/i18n",
+    "@vueuse/nuxt",
   ],
   css: [
     "normalize.css",
@@ -17,5 +17,8 @@ export default defineNuxtConfig({
      * @see https://github.com/unocss/unocss/issues/149#issuecomment-974606897
      */
     components: false,
+  },
+  i18n: {
+    vueI18n: "locales/index.ts",
   },
 });

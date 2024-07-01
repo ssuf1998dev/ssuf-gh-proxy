@@ -1,6 +1,6 @@
-# :construction: ssuf-github-downloader
+# :construction: ssuf-gh-proxy
 
 > [!IMPORTANT]
 > It is still under heavy development!
 
-> My GitHub downloader server behind a proxy.
+> A kit serving GitHub behind a proxy.

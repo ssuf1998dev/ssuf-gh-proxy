@@ -1,5 +1,6 @@
 {
   "prettier.enable": false,
+  "biome.enabled": false,
   "editor.tabSize": 2,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
