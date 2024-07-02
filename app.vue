@@ -30,10 +30,10 @@ useHead({
   >
     <NuxtRouteAnnouncer />
     <NElement>
-      <div class=":uno: w-screen h-screen">
+      <main class=":uno: w-screen h-screen">
         <span class=":uno: pointer-events-none bg-gradient-to-b from-[var(--primary-color)] to-50% opacity-15 pos-absolute w-full h-full" />
         <NuxtPage />
-      </div>
+      </main>
     </NElement>
   </NConfigProvider>
 </template>

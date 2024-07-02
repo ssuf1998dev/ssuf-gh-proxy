@@ -56,6 +56,9 @@ importers:
       eslint-plugin-format:
         specifier: ^0.1.2
         version: 0.1.2(eslint@9.6.0)
+      https-proxy-agent:
+        specifier: ^7.0.5
+        version: 7.0.5
       husky:
         specifier: ^9.0.11
         version: 9.0.11

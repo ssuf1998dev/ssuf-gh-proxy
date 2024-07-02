@@ -1,4 +1,13 @@
 {
   "title": "GitHub 代理小站",
-  "description": "为个人部署而设计的 GitHub 代理服务，以备不时之需~"
+  "description": "为个人部署而设计的 GitHub 代理服务，以备不时之需~",
+  "tip": "提示",
+  "helping": "帮助",
+  "help": {
+    "url": "请输入链接"
+  },
+  "feeback": {
+    "required": "必填，请输入",
+    "invalid": "格式不正确，请确定"
+  }
 }
