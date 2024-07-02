@@ -4,6 +4,9 @@
   "tip": "提示",
   "helping": "帮助",
   "help": {
+    "url": "链接协议可选，支持release、archive、源代码等下载，一般右键复制的链接均是OK的。"
+  },
+  "placeholder": {
     "url": "请输入链接"
   },
   "feeback": {
