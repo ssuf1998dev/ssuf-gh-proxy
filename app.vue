@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { generate } from "@arco-design/color";
-import { type GlobalThemeOverrides, NConfigProvider, NElement } from "naive-ui";
-import { enUS, zhCN } from "naive-ui";
+import { type GlobalThemeOverrides, NConfigProvider, NElement, enUS, zhCN } from "naive-ui";
 
 const colors = generate("#37B7C3", { list: true });
 const theme = {
@@ -13,7 +12,11 @@ const theme = {
   },
 } satisfies GlobalThemeOverrides;
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
+
+useHead({
+  titleTemplate: title => [title, t("title")].filter(Boolean).join(" - "),
+});
 </script>
 
 <template>
@@ -27,7 +30,8 @@ const { locale } = useI18n();
   >
     <NuxtRouteAnnouncer />
     <NElement>
-      <div class=":uno: w-screen h-screen color-[var(--body-color)]">
+      <div class=":uno: w-screen h-screen">
+        <span class=":uno: pointer-events-none bg-gradient-to-b from-[var(--primary-color)] to-50% opacity-15 pos-absolute w-full h-full" />
         <NuxtPage />
       </div>
     </NElement>

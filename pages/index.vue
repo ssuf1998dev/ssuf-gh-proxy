@@ -1,38 +1,36 @@
 <script setup lang="ts">
-import { NButton, NConfigProvider, NH2, NInput, NInputGroup, NText, darkTheme } from "naive-ui";
+import { NButton, NH1, NInput, NInputGroup, NText } from "naive-ui";
 
 import TablerBrandGithub from "~icons/tabler/brand-github";
-import TablerDownload from "~icons/tabler/download";
+import TablerArrowRight from "~icons/tabler/arrow-right";
 
 const { t } = useI18n();
 </script>
 
 <template>
   <div class=":uno: flex flex-col">
-    <div class=":uno: w-full pt-24 pb-32 bg-[var(--primary-color)] flex flex-col justify-center items-center gap-2">
-      <TablerBrandGithub class=":uno: w-14 h-14 color-[var(--body-color)]" />
-      <NH2 class=":uno: color-[var(--body-color)] my-0">
-        {{ t("title") }}
-      </NH2>
-      <NText class=":uno: color-[var(--body-color)]">
+    <div class=":uno: w-full pt-24 pb-32 flex flex-col justify-center items-center">
+      <div class=":uno: flex items-center gap-2">
+        <TablerBrandGithub class=":uno: w-10 h-10 color-[var(--primary-color)]" />
+        <NH1 class=":uno: my-0">
+          {{ t("title") }}
+        </NH1>
+      </div>
+      <NText class=":uno: my-2 opacity-75">
         {{ t("description") }}
       </NText>
 
-      <NInputGroup class=":uno: w-1/3! max-w-128 mt-8">
+      <NInputGroup class=":uno: w-1/3! max-w-128 min-w-84 mt-8">
         <NInput
           round
           autofocus
           :input-props="{ autocomplete: 'off' }"
-          size="large"
         />
-
-        <NConfigProvider :theme="darkTheme">
-          <NButton secondary class=":uno: rounded-r-full pl-3" size="large">
-            <template #icon>
-              <TablerDownload class=":uno: w-6 h-6 [&_path]:stroke-width-3" />
-            </template>
-          </NButton>
-        </NConfigProvider>
+        <NButton type="primary" class=":uno: rounded-r-full pl-4">
+          <template #icon>
+            <TablerArrowRight />
+          </template>
+        </NButton>
       </NInputGroup>
     </div>
     <div />
