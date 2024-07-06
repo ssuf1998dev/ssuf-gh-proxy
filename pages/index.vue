@@ -18,6 +18,7 @@ import {
 import TablerArrowRight from "~icons/tabler/arrow-right";
 import TablerBrandGithub from "~icons/tabler/brand-github";
 import TablerHelp from "~icons/tabler/help";
+import TablerTrash from "~icons/tabler/trash";
 
 const { t } = useI18n();
 
@@ -40,10 +41,15 @@ const urlInputRule = {
   trigger: ["input"],
 } satisfies FormRules[string];
 
-const urlHistory = useLocalStorage<string[]>("sgh-url-history", []);
+const urlHistory = useLocalStorage<string[]>("sgh-url-history", [], { initOnMounted: true });
 
 function go(url: string) {
   window.open(`proxy/${url}`, "_blank");
+}
+
+function clearUrlHistory(url: string) {
+  const idx = urlHistory.value.indexOf(url);
+  idx !== -1 && urlHistory.value.splice(idx, 1);
 }
 
 function submit() {
@@ -107,20 +113,35 @@ function submit() {
       </NFormItem>
     </NForm>
 
-    <ClientOnly>
-      <NSpace v-if="urlHistory.length" class=":uno: max-w-lg mt-4" justify="center">
-        <NTag
-          v-for="item in urlHistory"
-          :key="item"
-          class=":uno: cursor-pointer"
-          @click="() => {
-            go(item);
-          }"
-        >
-          {{ item }}
-        </NTag>
-      </NSpace>
-    </ClientOnly>
+    <NSpace
+      v-if="urlHistory.length"
+      class=":uno: max-w-lg mt-4"
+      justify="center"
+    >
+      <NTag
+        v-for="item in urlHistory"
+        :key="item"
+        class=":uno: cursor-pointer"
+        closable
+        @close="() => {
+          clearUrlHistory(item)
+        }"
+        @click="() => {
+          go(item);
+        }"
+      >
+        {{ item }}
+      </NTag>
+      <NButton
+        quaternary
+        size="small"
+        @click="() => {
+          urlHistory = []
+        }"
+      >
+        <TablerTrash />
+      </NButton>
+    </NSpace>
 
     <div class=":uno: mt-16 max-w-128">
       <NAlert :title="t('helping')">

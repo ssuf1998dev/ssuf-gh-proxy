@@ -3,6 +3,13 @@
   "description": "为个人部署而设计的 GitHub 代理服务，以备不时之需~",
   "tip": "提示",
   "helping": "帮助",
+  "goBackHome": "返回首页",
+  "errors": {
+    "happened": "出错啦！",
+    "404": "404 资源不存在",
+    "403": "403 禁止访问",
+    "unknown": "未知错误"
+  },
   "help": {
     "url": "链接协议可选，支持release、archive、源代码等下载，一般右键复制的链接均是OK的。"
   },
