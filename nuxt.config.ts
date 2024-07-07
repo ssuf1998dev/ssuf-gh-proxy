@@ -29,5 +29,6 @@ export default defineNuxtConfig({
       disabled: "SGP_DISABLE_AUTH",
       users: "SGP_USERS",
     },
+    allowedRoutes: ["/share/.*"],
   },
 });

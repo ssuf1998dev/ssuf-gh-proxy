@@ -31,6 +31,9 @@ importers:
       '@iconify-json/tabler':
         specifier: ^1.1.115
         version: 1.1.115
+      '@isaacs/ttlcache':
+        specifier: ^1.4.1
+        version: 1.4.1
       '@kgierke/nuxt-basic-auth':
         specifier: ^1.6.0
         version: 1.6.0(patch_hash=eogkqhpiuyciprutd4ply5s2ya)(magicast@0.3.4)(rollup@4.18.0)
@@ -82,6 +85,9 @@ importers:
       naive-ui:
         specifier: ^2.38.2
         version: 2.38.2(vue@3.4.31(typescript@5.5.2))
+      nanoid:
+        specifier: ^5.0.7
+        version: 5.0.7
       normalize.css:
         specifier: ^8.0.1
         version: 8.0.1
@@ -905,6 +911,10 @@ packages:
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
+    engines: {node: '>=12'}
+
+  '@isaacs/ttlcache@1.4.1':
+    resolution: {integrity: sha512-RQgQ4uQ+pLbqXfOmieB91ejmLwvSgv9nLx6sT6sD83s7umBypgg+OIBOBbEUiJXrfpnp9j0mRhYYdzp9uqq3lA==}
     engines: {node: '>=12'}
 
   '@jridgewell/gen-mapping@0.3.5':
@@ -6549,6 +6559,8 @@ snapshots:
       strip-ansi-cjs: strip-ansi@6.0.1
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
+
+  '@isaacs/ttlcache@1.4.1': {}
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:

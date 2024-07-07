@@ -5,6 +5,7 @@ import {
   type InputInst,
   NAlert,
   NButton,
+  NEllipsis,
   NForm,
   NFormItem,
   NH1,
@@ -13,12 +14,15 @@ import {
   NSpace,
   NTag,
   NText,
+  NTooltip,
+  useMessage,
 } from "naive-ui";
 
 import TablerArrowRight from "~icons/tabler/arrow-right";
 import TablerBrandGithub from "~icons/tabler/brand-github";
 import TablerHelp from "~icons/tabler/help";
 import TablerTrash from "~icons/tabler/trash";
+import TablerShare from "~icons/tabler/share";
 
 const { t } = useI18n();
 
@@ -61,6 +65,32 @@ function submit() {
 
     urlHistory.value = Array.from(new Set([formValue.value.url, ...urlHistory.value])).slice(0, 5);
     go(formValue.value.url);
+  });
+}
+
+const { copy } = useClipboard();
+const message = useMessage();
+
+function share() {
+  void formRef.value?.validate(async (errors) => {
+    if (errors?.length) {
+      urlInputRef.value?.focus();
+      return;
+    }
+
+    urlHistory.value = Array.from(new Set([formValue.value.url, ...urlHistory.value])).slice(0, 5);
+    try {
+      const resp = await $fetch("/share", {
+        method: "POST",
+        body: { url: formValue.value.url },
+      });
+      const hash = resp.hash;
+      await copy(`${location.protocol}//${location.host}/share/${hash}`);
+      message.success(t("shared.ok"));
+    }
+    catch {
+      message.error(t("shared.no"));
+    }
   });
 }
 </script>
@@ -109,19 +139,35 @@ function submit() {
               <TablerArrowRight />
             </template>
           </NButton>
+
+          <NTooltip>
+            <template #trigger>
+              <NButton
+                type="primary"
+                secondary
+                size="large"
+                @click="share"
+              >
+                <template #icon>
+                  <TablerShare />
+                </template>
+              </NButton>
+            </template>
+            {{ t('sharing') }}
+          </NTooltip>
         </NInputGroup>
       </NFormItem>
     </NForm>
 
     <NSpace
       v-if="urlHistory.length"
-      class=":uno: max-w-lg mt-4"
+      class=":uno: landscape:max-w-lg portrait:w-full mt-4 overflow-hidden"
       justify="center"
     >
       <NTag
         v-for="item in urlHistory"
         :key="item"
-        class=":uno: cursor-pointer"
+        class=":uno: cursor-pointer w-full [&_.n-tag\\_\\_content]:w-[calc(100%_-_18px)]"
         closable
         @close="() => {
           clearUrlHistory(item)
@@ -130,7 +176,9 @@ function submit() {
           go(item);
         }"
       >
-        {{ item }}
+        <NEllipsis class=":uno: w-full">
+          {{ item }}
+        </NEllipsis>
       </NTag>
       <NButton
         quaternary

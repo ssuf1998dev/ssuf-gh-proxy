@@ -4,6 +4,15 @@
   "tip": "提示",
   "helping": "帮助",
   "goBackHome": "返回首页",
+  "sharing": "生成分享链接",
+  "shared": {
+    "ok": "分享链接已复制，30分钟内有效，可重复访问3次",
+    "no": "生成分享链接失败",
+    "manager": "分享管理",
+    "url": "URL",
+    "hash": "唯一ID",
+    "times": "有效次数"
+  },
   "errors": {
     "happened": "出错啦！",
     "404": "404 资源不存在",
@@ -19,5 +28,6 @@
   "feeback": {
     "required": "必填，请输入",
     "invalid": "格式不正确，请确定"
-  }
+  },
+  "actions": "操作"
 }

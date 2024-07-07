@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { generate } from "@arco-design/color";
-import { type GlobalThemeOverrides, NConfigProvider, NElement, NGlobalStyle, darkTheme, enUS, zhCN } from "naive-ui";
+import { type GlobalThemeOverrides, NConfigProvider, NElement, NGlobalStyle, NMessageProvider, darkTheme, enUS, zhCN } from "naive-ui";
 
 withDefaults(defineProps<{
   showTopbar?: boolean;
@@ -33,17 +33,19 @@ const dark = useLocalStorage<boolean>("sgh-dark", false, { initOnMounted: true }
     inline-theme-disabled
     :theme="dark ? darkTheme : undefined"
   >
-    <NGlobalStyle />
-    <NElement>
-      <main class=":uno: w-full h-full">
-        <span
-          class=":uno: pointer-events-none bg-gradient-to-b from-[var(--primary-color)] to-50% pos-absolute w-full h-full transition-opacity"
-          :class="[{ ':uno: opacity-15': !dark, ':uno: opacity-30': dark }]"
-        />
-        <Topbar v-if="showTopbar" v-model:dark="dark" />
-        <slot />
-      </main>
-    </NElement>
+    <NMessageProvider>
+      <NGlobalStyle />
+      <NElement>
+        <main class=":uno: w-full h-full min-w-md">
+          <span
+            class=":uno: pointer-events-none bg-gradient-to-b from-[var(--primary-color)] to-50% pos-fixed w-full h-full transition-opacity"
+            :class="[{ ':uno: opacity-15': !dark, ':uno: opacity-30': dark }]"
+          />
+          <Topbar v-if="showTopbar" v-model:dark="dark" />
+          <slot />
+        </main>
+      </NElement>
+    </NMessageProvider>
   </NConfigProvider>
 </template>
 
