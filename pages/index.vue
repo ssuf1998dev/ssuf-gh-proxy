@@ -66,7 +66,7 @@ function submit() {
 </script>
 
 <template>
-  <section class=":uno: w-full flex flex-col justify-center items-center mb-6">
+  <section class=":uno: flex flex-col justify-center items-center mb-6 portrait:px-8">
     <div class=":uno: flex items-center gap-2 mt-16">
       <TablerBrandGithub class=":uno: w-11 h-11 color-[var(--primary-color)]" />
       <NH1 class=":uno: my-0">
@@ -81,7 +81,7 @@ function submit() {
       ref="formRef"
       :model="formValue"
       :rules="{ url: urlInputRule }"
-      class=":uno: w-1/3! max-w-164 min-w-84 mt-8"
+      class=":uno: landscape:w-1/3! landscape:max-w-164 landscape:min-w-128 portrait:w-full mt-8"
     >
       <NFormItem path="url" :show-label="false" feedback-class=":uno: mx-2">
         <NInputGroup>
@@ -143,7 +143,7 @@ function submit() {
       </NButton>
     </NSpace>
 
-    <div class=":uno: mt-16 max-w-128">
+    <div class=":uno: mt-16 landscape:max-w-128">
       <NAlert :title="t('helping')">
         <template #icon>
           <TablerHelp />
