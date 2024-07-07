@@ -53,6 +53,9 @@
       "allowedVersions": {
         "eslint": "9"
       }
+    },
+    "patchedDependencies": {
+      "@kgierke/nuxt-basic-auth@1.6.0": "patches/@kgierke__nuxt-basic-auth@1.6.0.patch"
     }
   },
   "lint-staged": {

@@ -23,12 +23,11 @@ export default defineNuxtConfig({
     vueI18n: "locales/index.ts",
   },
   basicAuth: {
-    enabled: process.env.SGP_DISABLE_AUTH !== "true",
-    users: [
-      {
-        username: process.env.SGP_USERNAME || "admin",
-        password: process.env.SGP_PASSWORD || "admin",
-      },
-    ],
+    enabled: true,
+    users: [{ username: "admin", password: "admin" }],
+    env: {
+      disabled: "SGP_DISABLE_AUTH",
+      users: "SGP_USERS",
+    },
   },
 });

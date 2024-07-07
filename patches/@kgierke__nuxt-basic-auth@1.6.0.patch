@@ -1,0 +1,58 @@
+diff --git a/dist/module.d.mts b/dist/module.d.mts
+index 8727c7e2c61371dc0165f7e9d56a251db836e764..6fa15b1c4511c66cacff6cc55ef8be5b6b25729f 100644
+--- a/dist/module.d.mts
++++ b/dist/module.d.mts
+@@ -8,6 +8,10 @@ interface ModuleOptions {
+     }[] | string;
+     usersDelimiter?: string;
+     allowedRoutes?: string[];
++    env?: {
++        disabled?: string;
++        users?: string;
++    };
+ }
+ type ModuleRuntimeConfig = ModuleOptions;
+ declare const _default: _nuxt_schema.NuxtModule<ModuleOptions>;
+diff --git a/dist/module.d.ts b/dist/module.d.ts
+index 8727c7e2c61371dc0165f7e9d56a251db836e764..6fa15b1c4511c66cacff6cc55ef8be5b6b25729f 100644
+--- a/dist/module.d.ts
++++ b/dist/module.d.ts
+@@ -8,6 +8,10 @@ interface ModuleOptions {
+     }[] | string;
+     usersDelimiter?: string;
+     allowedRoutes?: string[];
++    env?: {
++        disabled?: string;
++        users?: string;
++    };
+ }
+ type ModuleRuntimeConfig = ModuleOptions;
+ declare const _default: _nuxt_schema.NuxtModule<ModuleOptions>;
+diff --git a/dist/runtime/server/middleware/basic-auth.mjs b/dist/runtime/server/middleware/basic-auth.mjs
+index bad21f28f5cf5d7260f66ee26778b93572643e34..e93bc8ce2a144507cd43f3c8301b9451a447cb10 100644
+--- a/dist/runtime/server/middleware/basic-auth.mjs
++++ b/dist/runtime/server/middleware/basic-auth.mjs
+@@ -5,7 +5,12 @@ export default defineEventHandler((event) => {
+   if (event.node.req.headers?.["x-nitro-prerender"] && import.meta.env.NODE_ENV === "prerender") {
+     return;
+   }
+-  if (!config.enabled || typeof config.enabled === "string" && config.enabled !== "true" || !config.users?.length || config.allowedRoutes?.some((route) => {
++  const disabledFromEnv = import.meta.env[config.env?.disabled || "NUXT_BASIC_AUTH_DISABLED"] === "true";
++  const usersStringFromEnv = import.meta.env[config.env?.users || "NUXT_BASIC_AUTH_USERS"];
++  if (disabledFromEnv) {
++    return;
++  }
++  if (!config.enabled || typeof config.enabled === "string" && config.enabled !== "true" || (!config.users?.length && !usersStringFromEnv) || config.allowedRoutes?.some((route) => {
+     const regex = new RegExp(route);
+     return regex.test(event.node.req?.url || "");
+   })) {
+@@ -15,7 +20,8 @@ export default defineEventHandler((event) => {
+   const credentials = event.node.req.headers?.authorization?.split(" ")[1];
+   if (credentials) {
+     const [username, password] = Buffer.from(credentials, "base64").toString("utf8").split(":");
+-    const users = Array.isArray(config.users) ? config.users : config.users.split(config.usersDelimiter ?? ",").map((user) => {
++    const finalUsers = usersStringFromEnv || config.users;
++    const users = Array.isArray(finalUsers) ? finalUsers : finalUsers.split(config.usersDelimiter ?? ",").map((user) => {
+       const [username2, password2] = user.split(":");
+       return { username: username2, password: password2 };
+     });

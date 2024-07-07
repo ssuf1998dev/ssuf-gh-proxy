@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@kgierke/nuxt-basic-auth@1.6.0':
+    hash: eogkqhpiuyciprutd4ply5s2ya
+    path: patches/@kgierke__nuxt-basic-auth@1.6.0.patch
+
 importers:
 
   .:
@@ -28,7 +33,7 @@ importers:
         version: 1.1.115
       '@kgierke/nuxt-basic-auth':
         specifier: ^1.6.0
-        version: 1.6.0(magicast@0.3.4)(rollup@4.18.0)
+        version: 1.6.0(patch_hash=eogkqhpiuyciprutd4ply5s2ya)(magicast@0.3.4)(rollup@4.18.0)
       '@nuxtjs/i18n':
         specifier: ^8.3.1
         version: 8.3.1(magicast@0.3.4)(rollup@4.18.0)(vue@3.4.31(typescript@5.5.2))
@@ -6578,7 +6583,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@kgierke/nuxt-basic-auth@1.6.0(magicast@0.3.4)(rollup@4.18.0)':
+  '@kgierke/nuxt-basic-auth@1.6.0(patch_hash=eogkqhpiuyciprutd4ply5s2ya)(magicast@0.3.4)(rollup@4.18.0)':
     dependencies:
       '@nuxt/kit': 3.12.2(magicast@0.3.4)(rollup@4.18.0)
       defu: 6.1.4
