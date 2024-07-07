@@ -23,7 +23,12 @@ export default defineEventHandler((event) => {
     headers: omitBy(serverRequest.headers, (_, key) => ["host", "referer"].includes(key.toLowerCase())),
     agent,
   }, (clientResponse) => {
-    serverResponse.writeHead(clientResponse.statusCode ?? 204, clientResponse.headers);
+    const statusCode = clientResponse.statusCode ?? 204;
+    if (statusCode.toString().startsWith("3") && !!clientResponse.headers.location) {
+      clientResponse.headers.location = `${(serverRequest.headers.referer || "/").replace(/\/$/, "")}/proxy/${clientResponse.headers.location}`;
+    }
+
+    serverResponse.writeHead(statusCode, clientResponse.headers);
     clientResponse.pipe(serverResponse, { end: true });
   });
 
