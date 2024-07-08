@@ -3,5 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "schedule": ["on Monday before 3am"]
+  "schedule": ["on Monday before 3am"],
+  "assignees": ["ssuf1998dev"]
 }
